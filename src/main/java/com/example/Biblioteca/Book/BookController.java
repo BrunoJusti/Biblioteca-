@@ -1,4 +1,4 @@
-package com.example.Biblioteca;
+package com.example.Biblioteca.Book;
 
 import org.springframework.web.bind.annotation.*;
 

@@ -1,6 +1,9 @@
-package com.example.Biblioteca;
+package com.example.Biblioteca.Book;
 
+import com.example.Biblioteca.Usuarios.LivrosModel;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 //JPA = Java persistence API
 //Entity transforma uma classe em uma entidade do Banco de dados.
@@ -13,10 +16,11 @@ public class BookModel {
         @Id
         //Passando a estrategia de definir a sequencia dos ID's
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        Long id;
-        String nome;
-        String autor;
-        int anoPublicacao;
+        private Long id;
+        private String nome;
+        private String autor;
+        private int anoPublicacao;
+        private List<LivrosModel> livros; //falta criar a classe!!!!
 
     public BookModel() {
     }
