@@ -9,7 +9,7 @@ import java.util.List;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    private final UsuarioService usuarioService;
+    private UsuarioService  usuarioService;
 
     public UsuarioController(UsuarioService usuarioService) {
         this.usuarioService = usuarioService;
@@ -28,13 +28,13 @@ public class UsuarioController {
         }
 
         //Mostrar usuario por ID (READ)
-        @GetMapping("/listarID")
-        public String mostrarTodosOsUsuariosPorId() {
-            return "Mostrar Ninja por ID";
+        @GetMapping("/listar/{id}")
+        public UsuarioModel listarUsuarioPorId(@PathVariable Long id) {
+            return usuarioService.listarUsuarioPorId(id);
         }
 
         //Alterar dados dos usuarios (UPDATE)
-        @PutMapping("/alterarID")
+        @PutMapping("/alterarId")
         public String alterarUsuario() {
             return "Alterar Ninja por ID";
         }
