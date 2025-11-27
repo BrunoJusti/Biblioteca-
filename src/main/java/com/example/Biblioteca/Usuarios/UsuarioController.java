@@ -4,13 +4,8 @@ package com.example.Biblioteca.Usuarios;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("/usuario")
 public class UsuarioController {
-
-        @GetMapping("/usuario")
-        public String usuario(){
-            return "Is my second message!";
-        }
 
         //Adicionar usuário (CREATE)
         @PostMapping("/criar")
@@ -25,7 +20,7 @@ public class UsuarioController {
         }
 
         //Mostrar usuario por ID (READ)
-        @GetMapping("/todosID")
+        @GetMapping("/listarID")
         public String mostrarTodosOsUsuariosPorId() {
             return "Mostrar Ninja por ID";
         }
