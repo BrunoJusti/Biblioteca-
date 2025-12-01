@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuario")
+@RequestMapping("/usuarios")
 public class UsuarioController {
 
     private UsuarioService  usuarioService;
@@ -15,10 +15,10 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    //Adicionar usuário (CREATE)
+        //Adicionar usuário (CREATE)
         @PostMapping("/criar")
-        public String criarUsuario() {
-            return "Usuário criado com sucesso!";
+        public UsuarioModel criarUsuario(@RequestBody UsuarioModel usuario) {
+            return usuarioService.criarUsuario(usuario);
         }
 
         //Mostrar todos os usuarios (READ)

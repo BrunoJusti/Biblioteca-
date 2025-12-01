@@ -21,8 +21,13 @@ public class UsuarioService {
     }
 
     // Listar todos os usuários por ID
-   public UsuarioModel listarUsuarioPorId(Long Id) {
-        Optional<UsuarioModel> usuarioPorId = usuarioRepository.findById(Id);
+   public UsuarioModel listarUsuarioPorId(Long id) {
+        Optional<UsuarioModel> usuarioPorId = usuarioRepository.findById(id);
         return usuarioPorId.orElse(null);
    }
+
+   // Criar um novo usuário
+    public UsuarioModel criarUsuario(UsuarioModel usuario) {
+        return usuarioRepository.save(usuario);
+    }
 }
