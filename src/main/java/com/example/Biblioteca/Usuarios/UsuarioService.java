@@ -30,4 +30,9 @@ public class UsuarioService {
     public UsuarioModel criarUsuario(UsuarioModel usuario) {
         return usuarioRepository.save(usuario);
     }
+
+    // Deletar usuário - TEM QUE SER UM método VOID
+    public void deletarUsuarioPorId(Long id) {
+         usuarioRepository.deleteById(id);
+    }
 }
