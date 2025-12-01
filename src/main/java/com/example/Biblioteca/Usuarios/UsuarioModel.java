@@ -35,6 +35,9 @@ public class UsuarioModel {
     @Column(unique = true)
     private String email;
 
+    @Column(name = "CPF", length = 11, unique = true)
+    private String cpf;
+
     //@ManyToOne Um usuário terá direito a pegar apenas um livro por vez!
     @ManyToOne
     @JoinColumn(name = "books_id") //Foreing Key ou Chave estrangeira.
