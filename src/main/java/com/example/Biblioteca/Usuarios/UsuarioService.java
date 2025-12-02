@@ -1,10 +1,10 @@
 package com.example.Biblioteca.Usuarios;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
@@ -18,21 +18,24 @@ public class UsuarioService {
     }
 
     // Listar todos os usuários
-    public List<UsuarioModel> listarUsuarios() {
-            return  usuarioRepository.findAll();
+    public List<UsuarioDTO> listarUsuarios() {
+        List<UsuarioModel> usuarios = usuarioRepository.findAll();
+        return usuarios.stream()
+                .map(usuarioMapper::mapDTO       )
+                .collect(Collectors.toList());
     }
 
     // Listar todos os usuários por ID
-   public UsuarioModel listarUsuarioPorId(Long id) {
+   public UsuarioDTO listarUsuarioPorId(Long id) {
         Optional<UsuarioModel> usuarioPorId = usuarioRepository.findById(id);
-        return usuarioPorId.orElse(null);
+        return usuarioPorId.map(usuarioMapper::mapDTO).orElse(null);
    }
 
    // Criar um novo usuário
     public UsuarioDTO criarUsuario(UsuarioDTO usuarioDTO) {
-        UsuarioModel usuario = usuarioMapper.map(usuarioDTO);
+        UsuarioModel usuario = usuarioMapper.mapEntity(usuarioDTO);
         usuario = usuarioRepository.save(usuario);
-        return usuarioMapper.map(usuario);
+        return usuarioMapper.mapDTO(usuario);
     }
 
     // Deletar usuário - TEM QUE SER UM método VOID
@@ -41,11 +44,14 @@ public class UsuarioService {
     }
 
     // Atualizar usuário
-    public UsuarioModel atualizarUsuario(Long id,  UsuarioModel usuarioAtualizado) {
-        if (usuarioRepository.existsById(id)) {
+    public UsuarioDTO atualizarUsuario(Long id,  UsuarioDTO usuarioDTO) {
+        Optional<UsuarioModel> usuarioExistente = usuarioRepository.findById(id);
+        if (usuarioExistente.isPresent()) {
+            UsuarioModel usuarioAtualizado = usuarioMapper.mapEntity(usuarioDTO);
             usuarioAtualizado.setId(id);
-            return usuarioRepository.save(usuarioAtualizado);
+            UsuarioModel usuarioSalvo = usuarioRepository.save(usuarioAtualizado);
+            return usuarioMapper.mapDTO(usuarioSalvo);
         }
-            return null;
+        return null; // Caso não exista o Id solicitado para atualização.
     }
 }
