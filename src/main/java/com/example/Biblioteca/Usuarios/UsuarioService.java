@@ -10,9 +10,11 @@ import java.util.Optional;
 public class UsuarioService {
 
     private UsuarioRepository usuarioRepository;
+    private UsuarioMapper usuarioMapper;
 
-    public UsuarioService(UsuarioRepository usuarioRepository) {
+    public UsuarioService(UsuarioRepository usuarioRepository, UsuarioMapper usuarioMapper) {
         this.usuarioRepository = usuarioRepository;
+        this.usuarioMapper = usuarioMapper;
     }
 
     // Listar todos os usuários
@@ -27,8 +29,10 @@ public class UsuarioService {
    }
 
    // Criar um novo usuário
-    public UsuarioModel criarUsuario(UsuarioModel usuario) {
-        return usuarioRepository.save(usuario);
+    public UsuarioDTO criarUsuario(UsuarioDTO usuarioDTO) {
+        UsuarioModel usuario = usuarioMapper.map(usuarioDTO);
+        usuario = usuarioRepository.save(usuario);
+        return usuarioMapper.map(usuario);
     }
 
     // Deletar usuário - TEM QUE SER UM método VOID
