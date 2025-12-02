@@ -7,7 +7,7 @@ public class UsuarioMapper {
 
     // Mapeamento de uma entity para um DTO
 
-    public UsuarioModel map(UsuarioDTO usuarioDTO) {
+    public UsuarioModel mapEntity(UsuarioDTO usuarioDTO) {
         UsuarioModel usuarioModel = new UsuarioModel();
         usuarioModel.setId(usuarioDTO.getId());
         usuarioModel.setNome(usuarioDTO.getNome());
@@ -22,7 +22,7 @@ public class UsuarioMapper {
 
     // Mapeamento de um DTO para uma entity
 
-    public UsuarioDTO map(UsuarioModel usuarioModel) {
+    public UsuarioDTO mapDTO(UsuarioModel usuarioModel) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setId(usuarioModel.getId());
         usuarioDTO.setNome(usuarioModel.getNome());
